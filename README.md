@@ -22,6 +22,6 @@ Project created and maintained by Sharks Interactive.
 
 ### Code Style:
   - camelCase for variables eg: ``var correctUse;``
-  - PascalCase for function names eg: ``function CorrectUse();``
+  - cascalCase for function names eg: ``function correctUse();``
   - Brackets should be on the same line
   - Spaces, not tabs
