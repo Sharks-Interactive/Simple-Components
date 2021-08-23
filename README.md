@@ -1,6 +1,14 @@
 # Simple Components
 A small, vanilla JS library for easily replicating controls/components.
 
+# Usage:
+### NPM:
+``npm i @sharks-interactive/simple-components``
+### CDN:
+``https://www.jsdelivr.com/package/npm/@sharks-interactive/simple-components``
+### GITHUB:
+``coming soon!``
+
 ## How it works:
 Simple components loads components from individual html files and replicates them as many times as specified.
 EG: A settings page with multiple text + radio button groups. 
