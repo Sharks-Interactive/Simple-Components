@@ -1,0 +1,8 @@
+.prettierrc
+.gitignore
+.gitattributes
+.eslintrc
+.eslintignore
+
+.github/*
+src/*
