@@ -1,87 +1,109 @@
-function simpleComps(folder) {
-    let _this = this;
+/**
+ * Creates a new simpleComps instance
+ * @param {string} folder - Path to the folder containing comp files
+ */
+exports.simpleComps = function(folder) {
+  const _this = this;
 
-    this.render = component => {
-        var inputs = document.getElementsByTagName(component);
-        var promise = new Promise();
+  /**
+   * Renders the specified comp
+   * @param {string} component - The name of the comp to render
+   * @return {Promise} Callacks called when comp is done being rendered
+   */
+  this.render = (component) => {
+    const inputs = document.getElementsByTagName(component);
+    const promise = new Promise();
 
-        for (let i = 0; i < inputs.length; i++) {
-            fetch(folder + component + '.html').then(res => {
-                return res.text();
-            })
-                .then(data => {
-                    var newElement = document.createElement('div');
+    for (let i = 0; i < inputs.length; i++) {
+      fetch(folder + component + '.html')
+          .then((res) => {
+            return res.text();
+          })
+          .then((data) => {
+            const newElement = document.createElement('div');
 
-                    data = parseData(data, inputs.item(i));
+            data = parseData(data, inputs.item(i));
 
-                    newElement.innerHTML = data;
+            newElement.innerHTML = data;
 
-                    parseIfs(newElement);
+            parseIfs(newElement);
 
-                    inputs.item(i).appendChild(newElement);
+            inputs.item(i).appendChild(newElement);
 
-                    if (i == inputs.length - 1)
-                        promise.resolve();
-                });
-        }
-
-        return promise;
+            if (i == inputs.length - 1) promise.resolve();
+          });
     }
 
-    parseData = (data, elem) => {
-        var customAtts = data.match(/\{(.+?)\}/g);
+    return promise;
+  };
 
-        if (typeof customAtts == "undefined" || customAtts == null)
-            return data;
+  /**
+   * Parses custom data (eg: variables) in a component file
+   * @param {string} data - Raw HTML of a component in string format
+   * @param {HTMLElement} elem - Custom html element which we are rendering
+   * @return {string} The parsed version of the input data
+   */
+  parseData = (data, elem) => {
+    // Get a list of all {specialData} in the given component data
+    const customAtts = data.match(/\{(.+?)\}/g);
 
-        for (let i = 0; i < customAtts.length; i++) {
-            let _att = customAtts[i].replace('{', '');
-            _att = _att.replace('}', '');
+    if (typeof customAtts == 'undefined' || customAtts == null) return data;
 
-            data = data.replace(customAtts[i], elem.getAttribute(_att));
-        }
+    for (let i = 0; i < customAtts.length; i++) {
+      // Remove brackets from custom data/attributes
+      const _att = customAtts[i].replace(/[\{\}]+/g, '');
 
-        return data;
+      // Get value of attribute of same name on component element
+      data = data.replace(customAtts[i], elem.getAttribute(_att));
     }
 
-    parseIfs = (elm) => {
-        for (let g = 0; g < elm.children.length; g++) {
-            try {
-                for (var i = 0; i < elm.children.item(g).attributes.length; i++)
-                    if (elm.children.item(g).attributes[i].value == 'false' || elm.children.item(g).attributes[i].value == "null" && elm.children.item(g).attributes[i].name == "data-if")
-                        elm.removeChild(elm.children.item(g));
+    return data;
+  };
 
-                if (elm.children.item(g).children.length > 0)
-                    parseIfs(elm.children.item(g));
-
-            } catch (error) {}
+  /**
+   * Parses if attributes in a component
+   * @param {HTMLDivElement} elm - The HTML element to parse ifs on
+   */
+  parseIfs = (elm) => {
+    for (let g = 0; g < elm.children.length; g++) {
+      try {
+        for (let i = 0; i < elm.children.item(g).attributes.length; i++) {
+          if (
+            elm.children.item(g).attributes[i].value == 'false' ||
+            (elm.children.item(g).attributes[i].value == 'null' &&
+              elm.children.item(g).attributes[i].name == 'data-if')
+          ) {
+            elm.removeChild(elm.children.item(g));
+          }
         }
-    }
 
-    function Promise() {
-        // start unresolved
-        this.resolved = false;
-        // init list of callbacks to fire on resolution
-        this.callbacks = [];
-    }
-
-    Promise.prototype = {
-        then: function (callback) {
-            if (this.resolved) {
-                // if resolved, fire immediately
-                callback();
-            } else {
-                // otherwise, queue up the callback for later
-                this.callbacks.push(callback);
-            }
-        },
-
-        resolve: function () {
-            this.resolved = true;
-            // fire all callbacks
-            this.callbacks.forEach(function (callback) {
-                callback();
-            });
+        if (elm.children.item(g).children.length > 0) {
+          parseIfs(elm.children.item(g));
         }
-    };
-}
+      } catch (error) {}
+    }
+  };
+
+  /**
+   * Creates a promise
+   */
+  function Promise() {
+    this.resolved = false;
+    this.callbacks = []; // List of callbacks to fire on resolution
+  }
+
+  Promise.prototype = {
+    then: function(callback) {
+      if (this.resolved) callback();
+      else this.callbacks.push(callback); // Queue up callback for later
+    },
+
+    resolve: function() {
+      this.resolved = true;
+      // Fire all callbacks
+      this.callbacks.forEach(function(callback) {
+        callback();
+      });
+    },
+  };
+};
