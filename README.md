@@ -18,6 +18,14 @@ EG: A settings page with multiple text + radio button groups.
 Make the label and radion button in a component.html file
 Call simple comps to render x number of them with specific data.
 
+## Functionality
+- Custom component data
+- Conditional rendering of child elements
+- Easy replication of repeated HTML
+### All in vanilla js with _no_ dependencies and in only 1KB [for minified version] 
+
+###### (The four dependencies listed are devDeps)
+
 ### Read the wiki for documentation.
 
 ## src /
