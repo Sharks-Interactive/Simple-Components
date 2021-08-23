@@ -1,9 +1,10 @@
 .prettierrc
 .gitignore
 .gitattributes
-.eslintrc
+.eslintrc.json
 .eslintignore
+.npmrc
 
 .github/*
-src/*
+src/simple-components.js
 test/*
