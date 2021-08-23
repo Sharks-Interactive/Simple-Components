@@ -2,7 +2,7 @@
  * Creates a new simpleComps instance
  * @param {string} folder - Path to the folder containing comp files
  */
-exports.simpleComps = function(folder) {
+export function SimpleComps(folder) {
   const _this = this;
 
   /**
@@ -43,7 +43,7 @@ exports.simpleComps = function(folder) {
    * @param {HTMLElement} elem - Custom html element which we are rendering
    * @return {string} The parsed version of the input data
    */
-  parseData = (data, elem) => {
+  const parseData = (data, elem) => {
     // Get a list of all {specialData} in the given component data
     const customAtts = data.match(/\{(.+?)\}/g);
 
@@ -58,13 +58,13 @@ exports.simpleComps = function(folder) {
     }
 
     return data;
-  };
+  }
 
   /**
    * Parses if attributes in a component
    * @param {HTMLDivElement} elm - The HTML element to parse ifs on
    */
-  parseIfs = (elm) => {
+  const parseIfs = (elm) => {
     for (let g = 0; g < elm.children.length; g++) {
       try {
         for (let i = 0; i < elm.children.item(g).attributes.length; i++) {
@@ -106,4 +106,4 @@ exports.simpleComps = function(folder) {
       });
     },
   };
-};
+}
