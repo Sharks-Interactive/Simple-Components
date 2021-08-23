@@ -8,9 +8,9 @@ A small, vanilla JS library for easily replicating controls/components.
 #### JSDELIVER:
 ``https://www.jsdelivr.com/package/npm/@sharks-interactive/simple-components``
 #### UNPKG:
-``https://unpkg.com/@sharks-interactive/simple-components@1.1.2/dist/simple-components.min.js``
+``https://unpkg.com/@sharks-interactive/simple-components@1.1.3/dist/simple-components.min.js``
 ### GITHUB:
-``https://github.com/Sharks-Interactive/Simple-Components/releases/download/1.1.2/simple-components.min.js``
+``https://github.com/Sharks-Interactive/Simple-Components/releases/download/1.1.3/simple-components.min.js``
 
 ## How it works:
 Simple components loads components from individual html files and replicates them as many times as specified.
