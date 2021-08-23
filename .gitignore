@@ -6,6 +6,5 @@ package-lock.json
 
 npm-debug.log*
 
-/dist/*
 /external
 /node_modules
