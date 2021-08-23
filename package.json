@@ -1,10 +1,10 @@
 {
     "name": "@sharks-interactive/simple-components",
-    "version": "1.1.2",
+    "version": "1.1.3",
     "description": "A vanilla js library for easy replication of html components.",
     "main": "dist/simple-components.min.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test": "test/simple-components.test.html",
         "format": "prettier --write '**/*.{js,json,md}'"
     },
     "repository": {
