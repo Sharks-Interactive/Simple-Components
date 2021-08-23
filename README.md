@@ -25,3 +25,4 @@ Project created and maintained by Sharks Interactive.
   - cascalCase for function names eg: ``function correctUse();``
   - Brackets should be on the same line
   - Spaces, not tabs
+  - Depending on the situation (readability/line length) single line if statements should be same line eg: ``if (this) doStuff();``
