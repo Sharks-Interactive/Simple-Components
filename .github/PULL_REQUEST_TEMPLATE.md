@@ -12,7 +12,7 @@ Mark an `[x]` for completed items, if you're not sure leave them unchecked.
 
 * [ ] This pull request conforms to code style
 * [ ] Everything in this pull request is freakin' awesome
-* [ ] Grunt build and unit tests pass locally with these changes
+* [ ] Unit tests pass locally with these changes
 * [ ] An issue was created, if needed
 
 <!--

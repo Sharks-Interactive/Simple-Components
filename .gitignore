@@ -3,6 +3,8 @@
 *~
 .DS_Store
 package-lock.json
+.npmignore
+.npmrc
 
 npm-debug.log*
 
