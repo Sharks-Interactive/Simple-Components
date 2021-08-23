@@ -2,7 +2,7 @@
     "name": "@sharks-interactive/simple-components",
     "version": "1.1.2",
     "description": "A vanilla js library for easy replication of html components.",
-    "main": "src/simple-components.js",
+    "main": "dist/simple-components.min.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "format": "prettier --write '**/*.{js,json,md}'"
