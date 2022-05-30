@@ -1,6 +1,6 @@
 {
     "name": "@sharks-interactive/simple-components",
-    "version": "1.2.2",
+    "version": "1.2.3",
     "description": "A vanilla js library for easy replication of html components.",
     "main": "dist/simple-components.min.js",
     "scripts": {
