@@ -29,9 +29,6 @@
     "bugs": {
         "url": "https://github.com/Sharks-Interactive/Simple-Components/issues"
     },
-    "publishConfig": {
-        "registry":"https://npm.pkg.github.com"
-    },
     "homepage": "https://github.com/Sharks-Interactive/Simple-Components#readme",
     "files": [
         "dist",
