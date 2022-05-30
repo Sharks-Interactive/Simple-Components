@@ -1,15 +1,16 @@
 {
     "name": "@sharks-interactive/simple-components",
-    "version": "1.1.4",
+    "version": "1.2.0",
     "description": "A vanilla js library for easy replication of html components.",
     "main": "dist/simple-components.min.js",
     "scripts": {
-        "test": "test/simple-components.test.html",
-        "format": "prettier --write '**/*.{js,json,md}'"
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "format": "prettier --write '**/*.{js,json,md}'",
+	"lint-fix": "eslint . --ext .js --fix"
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/Sharks-Interactive/Simple-Components.git"
+        "url": "git://github.com/Sharks-Interactive/Simple-Components.git"
     },
     "keywords": [
         "javascript-library",
@@ -25,11 +26,16 @@
         "prettier": "1.19.1",
         "prettier-eslint": "^12.0.0"
     },
-    "publishConfig": {
-        "registry": "https://npm.pkg.github.com"
-    },
     "bugs": {
         "url": "https://github.com/Sharks-Interactive/Simple-Components/issues"
     },
-    "homepage": "https://github.com/Sharks-Interactive/Simple-Components#readme"
+    "publishConfig": {
+        "registry":"https://npm.pkg.github.com"
+    },
+    "homepage": "https://github.com/Sharks-Interactive/Simple-Components#readme",
+    "files": [
+        "dist",
+        "LICENSE.txt",
+        "README.md"
+    ]
 }
