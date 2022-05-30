@@ -1,6 +1,6 @@
 
 <p align='center'>
-  <img src="https://i.imgur.com/7svMXLi.png" />
+  <img src="https://i.imgur.com/OOFSqpg.png" />
 </p>
 
 ![npm version](https://img.shields.io/npm/v/@sharks-interactive/simple-components)
