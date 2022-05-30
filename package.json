@@ -1,6 +1,6 @@
 {
     "name": "@sharks-interactive/simple-components",
-    "version": "1.2.2",
+    "version": "1.2.3",
     "description": "A vanilla js library for easy replication of html components.",
     "main": "dist/simple-components.min.js",
     "scripts": {
@@ -28,9 +28,6 @@
     },
     "bugs": {
         "url": "https://github.com/Sharks-Interactive/Simple-Components/issues"
-    },
-    "publishConfig": {
-        "registry":"https://npm.pkg.github.com"
     },
     "homepage": "https://github.com/Sharks-Interactive/Simple-Components#readme",
     "files": [
