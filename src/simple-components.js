@@ -135,6 +135,13 @@ export function SimpleComps(folder) {
           ) {
             elm.removeChild(elm.children.item(g));
           }
+          if (
+            elm.children.item(g).attributes[i].value == 'true' ||
+            (elm.children.item(g).attributes[i].value != 'null' &&
+              elm.children.item(g).attributes[i].name == 'data-not')
+          ) {
+            elm.removeChild(elm.children.item(g));
+          }
         }
 
         if (elm.children.item(g).children.length > 0) {
