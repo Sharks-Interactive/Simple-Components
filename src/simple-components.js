@@ -129,16 +129,14 @@ export function SimpleComps(folder) {
       try {
         for (let i = 0; i < elm.children.item(g).attributes.length; i++) {
           if (
-            elm.children.item(g).attributes[i].value == 'false' ||
-            (elm.children.item(g).attributes[i].value == 'null' &&
-              elm.children.item(g).attributes[i].name == 'data-if')
+            elm.children.item(g).attributes[i].value == 'false' &&
+              elm.children.item(g).attributes[i].name == 'data-if'
           ) {
             elm.removeChild(elm.children.item(g));
           }
           if (
-            elm.children.item(g).attributes[i].value == 'true' ||
-            (elm.children.item(g).attributes[i].value != 'null' &&
-              elm.children.item(g).attributes[i].name == 'data-not')
+            elm.children.item(g).attributes[i].value == 'true' &&
+            elm.children.item(g).attributes[i].name == 'data-not'
           ) {
             elm.removeChild(elm.children.item(g));
           }
