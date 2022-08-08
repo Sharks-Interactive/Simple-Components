@@ -83,10 +83,10 @@ export function SimpleComps(folder) {
       if (attributes == null) continue;
 
       try {
-        for (let x = 0; x < attributes.l[i].attrs.length; x++) {
+        for (let x = 0; x < Object.keys(attributes[i]).length; x++) {
           createdElement.setAttribute(
-              attributes.l[i].attrs[x].split('|')[0],
-              attributes.l[i].attrs[x].split('|')[1],
+              Object.keys(attributes[i])[x],
+              Object.values(attributes[i])[x],
           );
         }
       } catch (e) {}
