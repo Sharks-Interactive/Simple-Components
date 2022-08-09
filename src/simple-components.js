@@ -7,9 +7,10 @@ export function SimpleComps(folder) {
   /**
    * Renders the specified comp
    * @param {string} component - The name of the comp to render
+   * @param {boolean} inject - If true the component will directly be rendered onto the page instead of inside its component element
    * @return {Promise} Callacks called when comp is done being rendered
    */
-  this.render = (component) => {
+  this.render = (component, inject = false) => {
     const inputs = document.getElementsByTagName(component);
     const promise = new Promise();
 
@@ -19,8 +20,9 @@ export function SimpleComps(folder) {
         })
         .then((componentFile) => {
           const componentData = componentFile;
+          let deletedElms = 0;
 
-          for (let i = 0; i < inputs.length; i++) {
+          for (let i = 0; i < inputs.length + deletedElms; i++) {
             if (componentData == undefined) {
               promise.resolve();
               return promise;
@@ -31,7 +33,7 @@ export function SimpleComps(folder) {
             const newElement = document.createElement('div');
             const newScript = document.createElement('script'); // Add script tag (If we need it)
 
-            data = parseData(data, inputs.item(i));
+            data = parseData(data, inputs.item(i - deletedElms));
 
             if (data.includes('script')) {
               const script = data.match(/\<script(.*?)>(.+)\<\/script>/gs)[0];
@@ -48,15 +50,23 @@ export function SimpleComps(folder) {
               } catch {} // If it has one, set the scripts type
             }
 
-            newElement.innerHTML = data;
+            let parent = inputs.item(i - deletedElms).parentElement;
+
+            if (!inject) newElement.innerHTML = data;
+            else parent.innerHTML += data;
 
             parseIfs(newElement);
 
-            inputs.item(i).appendChild(newElement);
+            if (!inject) inputs.item(i - deletedElms).appendChild(newElement);
+            else {
+              parent.removeChild(inputs.item(i - deletedElms));
+              deletedElms++;
+            }
+
             /* IMPORTANT: If your seeing errors on this line it means that you have an error in your components code! */
             if (newScript != null) newElement.appendChild(newScript); // Add script to element
 
-            if (i == inputs.length - 1) promise.resolve();
+            if (i == (inputs.length + deletedElms) - 1) promise.resolve();
           }
         });
 
