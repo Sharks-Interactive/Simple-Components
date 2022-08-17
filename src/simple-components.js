@@ -10,7 +10,7 @@ export function SimpleComps(folder) {
    * @param {boolean} inject - If true the component will directly be rendered onto the page instead of inside its component element
    * @return {Promise} Callacks called when comp is done being rendered
    */
-  this.render = (component, inject = false) => {
+  this.render = (component, inject = false, ignore = false) => {
     const inputs = document.getElementsByTagName(component);
     const promise = new Promise();
 
@@ -33,7 +33,7 @@ export function SimpleComps(folder) {
             const newElement = document.createElement('div');
             const newScript = document.createElement('script'); // Add script tag (If we need it)
 
-            data = parseData(data, inputs.item(i - deletedElms));
+            data = parseData(data, inputs.item(i - deletedElms), ignore);
 
             if (data.includes('script')) {
               const script = data.match(/\<script(.*?)>(.+)\<\/script>/gs)[0];
@@ -53,7 +53,7 @@ export function SimpleComps(folder) {
             let parent = inputs.item(i - deletedElms).parentElement;
 
             if (!inject) newElement.innerHTML = data;
-            else parent.innerHTML += data;
+            else parent.appendChild(new DOMParser().parseFromString(data, 'text/html').body.firstChild);
 
             parseIfs(newElement);
 
@@ -109,7 +109,7 @@ export function SimpleComps(folder) {
    * @param {HTMLElement} elem - Custom html element which we are rendering
    * @return {string} The parsed version of the input data
    */
-  const parseData = (data, elem) => {
+  const parseData = (data, elem, ignore) => {
     // Get a list of all {specialData} in the given component data
     const customAtts = data.match(/\{(.+?)\}/g);
 
@@ -120,6 +120,7 @@ export function SimpleComps(folder) {
       const _att = customAtts[i].replace(/[\{\}]+/g, '');
       if (elem.getAttribute(_att) == undefined) {
         console.warn(`SKIPPING ${_att}`);
+        if (ignore) data = data.replace(customAtts[i], '');
         continue;
       } // No attr of this type exists on this comp - skip it
 
