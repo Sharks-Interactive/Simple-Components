@@ -33,14 +33,12 @@ export function SimpleComps(folder) {
             const newElement = document.createElement('div');
             const newScript = document.createElement('script'); // Add script tag (If we need it)
 
-            data = parseData(data, inputs.item(i - deletedElms), ignore);
-
             if (data.includes('script')) {
               const script = data.match(/\<script(.*?)>(.+)\<\/script>/gs)[0];
-              newScript.innerHTML = script.replace(
+              newScript.innerHTML = parseData(script.replace(
                   /(<script(.*?)>|<\/script>)/gs,
                   '',
-              ); // Remove script tags
+              ), inputs.item(i - deletedElms).parentElement); // Remove script tags and prase custom data for script
 
               data = data.replace(/\<script(.*?)>(.+)\<\/script>/gs, ''); // Remove code from innerHTML
               try {
@@ -49,6 +47,8 @@ export function SimpleComps(folder) {
                     .replace(/type="|"/gs, '');
               } catch {} // If it has one, set the scripts type
             }
+
+            data = parseData(data, inputs.item(i - deletedElms), ignore); // Dont parse data until after scripts are executed so we dont execute 3rd party scripts
 
             let parent = inputs.item(i - deletedElms).parentElement;
 
