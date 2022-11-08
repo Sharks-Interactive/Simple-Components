@@ -14,7 +14,7 @@ export function SimpleComps(folder) {
     const inputs = document.getElementsByTagName(component);
     const promise = new Promise();
 
-    fetch(folder + component + '.html')
+    fetch(folder + component + '.html?comp=true')
         .then((res) => {
           return res.text();
         })
